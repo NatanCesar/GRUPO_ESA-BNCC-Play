@@ -1,0 +1,92 @@
+body {
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+background: #0f172a;
+color: #e5e7eb;
+}
+
+
+.screen {
+display: none;
+min-height: 100vh;
+padding: 30px;
+}
+
+
+.active {
+display: block;
+}
+
+
+.center {
+max-width: 900px;
+margin: auto;
+}
+
+
+h1, h2, h3 {
+text-align: center;
+}
+
+
+.card {
+background: #111827;
+border-radius: 14px;
+padding: 20px;
+margin: 15px 0;
+box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+
+button {
+background: #2563eb;
+border: none;
+padding: 12px 18px;
+border-radius: 10px;
+color: white;
+font-size: 16px;
+cursor: pointer;
+margin: 6px;
+}
+
+
+button:hover { opacity: 0.9; }
+
+
+.row {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+}
+
+
+.role {
+background: #1f2937;
+padding: 12px 14px;
+border-radius: 10px;
+cursor: grab;
+user-select: none;
+}
+
+
+.dropzone {
+border: 2px dashed #374151;
+border-radius: 12px;
+padding: 20px;
+text-align: center;
+}
+
+
+.topbar {
+display: flex;
+justify-content: space-between;
+font-weight: bold;
+}
+
+
+.badge {
+padding: 6px 10px;
+border-radius: 999px;
+background: #1f2937;
+}

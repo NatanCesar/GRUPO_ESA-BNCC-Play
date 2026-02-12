@@ -1,5 +1,16 @@
 const config = JSON.parse(localStorage.getItem("gameConfig"));
 
+document.getElementById("continueBtn").addEventListener("click", () => {
+    document.getElementById("feedbackModal").classList.add("hidden");
+
+    if (lives <= 0 || remainingCalls <= 0) {
+        endGame();
+    } else {
+        loadCall();
+    }
+});
+
+
 if (!config) {
     window.location.href = "../levels/index.html";
 }
@@ -60,14 +71,26 @@ function loadCall() {
 function handleCorrect() {
     score += 100;
     clearInterval(timerInterval);
-    loadCall();
+
+    showFeedback(
+        true,
+        "Boa decisão!",
+        `Correto. Esse chamado é responsabilidade do ${formatRole(currentCall.role)}.`
+    );
 }
 
 function handleWrong() {
     lives--;
     clearInterval(timerInterval);
-    loadCall();
+
+    showFeedback(
+        false,
+        "Atenção!",
+        `Quem deveria resolver isso é o ${formatRole(currentCall.role)}. 
+        Revise as responsabilidades das áreas de TI.`
+    );
 }
+
 
 function endGame() {
     localStorage.setItem("finalScore", score);
@@ -90,6 +113,37 @@ document.querySelectorAll(".drop-zone").forEach(zone => {
         }
     });
 });
+
+function showFeedback(isCorrect, title, message) {
+    const modal = document.getElementById("feedbackModal");
+    const content = modal.querySelector(".modal-content");
+
+    document.getElementById("feedbackTitle").textContent = title;
+    document.getElementById("feedbackMessage").textContent = message;
+
+    content.classList.remove("success", "error");
+
+    if (isCorrect) {
+        content.classList.add("success");
+    } else {
+        content.classList.add("error");
+    }
+
+    modal.classList.remove("hidden");
+}
+
+function formatRole(role) {
+    const roles = {
+        frontend: "Frontend",
+        backend: "Backend",
+        devops: "DevOps",
+        ux: "UX/UI",
+        qa: "QA",
+        data: "Dados"
+    };
+    return roles[role];
+}
+
 
 loadCall();
 updateHUD();

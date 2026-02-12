@@ -35,5 +35,5 @@ document.querySelectorAll(".select-btn").forEach(button => {
 });
 
 document.getElementById("backBtn").addEventListener("click", () => {
-    window.location.href = "../index.html";
+    window.location.href = "../main-menu/index.html";
 });

@@ -12,9 +12,9 @@ function startGame() {
     // Salva o nome no localStorage para usar na tela de jogo
     localStorage.setItem("playerName", playerName);
 
-    window.location.href = "./select-dificult/index.html";
+    window.location.href = "../select-dificult/index.html";
 }
 
 function goToAbout() {
-    window.location.href = "./about/index.html";
+    window.location.href = "../about/index.html";
 }

@@ -1,79 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Squad Manager — Protótipo</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Jogo — Tech Squad Manager</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <!-- JOGO -->
-    <section id="game" class="screen">
-        <div class="center">
-            <div class="topbar">
-                <div>Tempo: <span id="time">--</span></div>
-                <div>Pontos: <span id="score">0</span></div>
-                <div>Rodada: <span id="round">1</span></div>
+
+    <main class="game-container">
+
+        <!-- HUD -->
+        <header class="hud">
+            <div>Nível: <span id="levelName"></span></div>
+            <div>⏳ Tempo: <span id="timer"></span>s</div>
+            <div>⭐ Pontos: <span id="score">0</span></div>
+            <div>❤️ Vidas: <span id="lives"></span></div>
+        </header>
+
+        <!-- Área do Chamado -->
+        <section class="call-area">
+            <div class="call-card" draggable="true" id="callCard">
+                <h3>Chamado</h3>
+                <p id="callText"></p>
             </div>
+        </section>
 
+        <!-- Equipe -->
+        <section class="team-area">
+            <div class="drop-zone" data-role="frontend">Frontend</div>
+            <div class="drop-zone" data-role="backend">Backend</div>
+            <div class="drop-zone" data-role="devops">DevOps</div>
+            <div class="drop-zone" data-role="ux">UX/UI</div>
+            <div class="drop-zone" data-role="qa">QA</div>
+            <div class="drop-zone" data-role="data">Dados</div>
+        </section>
 
-            <div class="card">
-                <h3>Demanda</h3>
-                <div id="demandText"></div>
-            </div>
+    </main>
 
-
-            <div class="card dropzone" ondrop="dropRole(event)" ondragover="event.preventDefault()">
-                Solte o profissional aqui
-            </div>
-
-
-            <h3>Equipe</h3>
-            <div class="row" id="roles"></div>
-        </div>
-    </section>
-
-
-    <!-- FEEDBACK -->
-    <section id="feedback" class="screen">
-        <div class="center card" style="text-align:center">
-            <h2 id="fbTitle"></h2>
-            <p id="fbText"></p>
-            <button onclick="nextDemand()">Próxima</button>
-        </div>
-    </section>
-
-
-    <!-- RESULTADO -->
-    <section id="result" class="screen">
-        <div class="center card" style="text-align:center">
-            <h2>Resultado Final</h2>
-            <p>Pontuação: <span id="finalScore"></span></p>
-            <button onclick="go('menu')">Menu</button>
-        </div>
-    </section>
-
-
-    <!-- CARREIRAS -->
-    <section id="careers" class="screen">
-        <div class="center card">
-            <h2>Carreiras de TI</h2>
-            <ul>
-                <li><b>Frontend:</b> Interface visual</li>
-                <li><b>Backend:</b> APIs e regras</li>
-                <li><b>DevOps:</b> Infraestrutura</li>
-                <li><b>QA:</b> Testes</li>
-                <li><b>UX/UI:</b> Experiência</li>
-                <li><b>Dados:</b> Análise</li>
-                <li><b>Segurança:</b> Proteção</li>
-            </ul>
-            <button onclick="go('menu')">Voltar</button>
-        </div>
-    </section>
-
-    <script src="js/script.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

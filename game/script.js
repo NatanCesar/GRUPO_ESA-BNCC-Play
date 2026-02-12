@@ -1,86 +1,95 @@
-const roles = ["Frontend", "Backend", "DevOps", "QA", "UX/UI", "Dados", "Segurança"];
+const config = JSON.parse(localStorage.getItem("gameConfig"));
 
+if (!config) {
+    window.location.href = "../levels/index.html";
+}
 
-const demands = [
-    { t: "API de pagamentos lenta", r: "Backend", tip: "Backend cuida de APIs" },
-    { t: "Layout quebrado no mobile", r: "Frontend", tip: "Frontend ajusta interface" },
-    { t: "Pipeline de deploy falhou", r: "DevOps", tip: "DevOps mantém deploy" },
-    { t: "Usuários confusos na tela", r: "UX/UI", tip: "UX/UI melhora usabilidade" },
-    { t: "Testar nova feature", r: "QA", tip: "QA executa testes" },
-    { t: "Analisar padrão de vendas", r: "Dados", tip: "Dados analisa métricas" },
-    { t: "Falha de autenticação", r: "Segurança", tip: "Segurança protege acesso" }
+document.getElementById("levelName").textContent = config.levelName;
+
+let score = 0;
+let lives = config.lives;
+let remainingCalls = config.totalCalls;
+let timeLeft = config.timePerCall;
+let timerInterval;
+
+const calls = [
+    { text: "O botão não está alinhado corretamente.", role: "frontend" },
+    { text: "A API está retornando erro 500.", role: "backend" },
+    { text: "Pipeline de deploy falhou.", role: "devops" },
+    { text: "Usuários estão confusos com o layout.", role: "ux" },
+    { text: "Bug crítico encontrado em produção.", role: "qa" },
+    { text: "Consulta ao banco está lenta.", role: "data" }
 ];
 
+let currentCall;
 
-let score = 0, idx = 0, maxRounds = 5, timeLeft = 0, timer = null;
-
-
-function go(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+function updateHUD() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("lives").textContent = lives;
+    document.getElementById("timer").textContent = timeLeft;
 }
 
+function startTimer() {
+    timeLeft = config.timePerCall;
+    updateHUD();
 
-function startGame(rounds, time) {
-    score = 0; idx = 0; maxRounds = rounds; timeLeft = time;
-    document.getElementById('score').innerText = score;
-    renderRoles();
-    nextDemand();
-    go('game');
-    if (timer) clearInterval(timer);
-    if (time > 0) {
-        timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById('time').innerText = timeLeft;
-            if (timeLeft <= 0) endGame();
-        }, 1000);
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateHUD();
+
+        if (timeLeft <= 0) {
+            handleWrong();
+        }
+    }, 1000);
+}
+
+function loadCall() {
+    if (remainingCalls <= 0 || lives <= 0) {
+        endGame();
+        return;
     }
+
+    currentCall = calls[Math.floor(Math.random() * calls.length)];
+    document.getElementById("callText").textContent = currentCall.text;
+
+    remainingCalls--;
+    startTimer();
 }
 
-
-function renderRoles() {
-    const box = document.getElementById('roles');
-    box.innerHTML = '';
-    roles.forEach(r => {
-        const d = document.createElement('div');
-        d.className = 'role';
-        d.draggable = true;
-        d.innerText = r;
-        d.ondragstart = e => e.dataTransfer.setData('text', r);
-        box.appendChild(d);
-    });
+function handleCorrect() {
+    score += 100;
+    clearInterval(timerInterval);
+    loadCall();
 }
 
-
-function nextDemand() {
-    if (idx >= maxRounds) { endGame(); return; }
-    const d = demands[idx % demands.length];
-    document.getElementById('demandText').innerText = d.t;
-    document.getElementById('round').innerText = idx + 1;
-    go('game');
+function handleWrong() {
+    lives--;
+    clearInterval(timerInterval);
+    loadCall();
 }
-
-
-function dropRole(ev) {
-    const role = ev.dataTransfer.getData('text');
-    const d = demands[idx % demands.length];
-    let correct = role === d.r;
-    if (correct) { score += 100; showFb(true, d.tip); }
-    else { score -= 30; showFb(false, `Correto: ${d.r} — ${d.tip}`); }
-    document.getElementById('score').innerText = score;
-    idx++;
-}
-
-
-function showFb(ok, text) {
-    document.getElementById('fbTitle').innerText = ok ? '✔ Correto' : '✖ Incorreto';
-    document.getElementById('fbText').innerText = text;
-    go('feedback');
-}
-
 
 function endGame() {
-    if (timer) clearInterval(timer);
-    document.getElementById('finalScore').innerText = score;
-    go('result');
+    localStorage.setItem("finalScore", score);
+    window.location.href = "../report/index.html";
 }
+
+document.querySelectorAll(".drop-zone").forEach(zone => {
+
+    zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    });
+
+    zone.addEventListener("drop", () => {
+        const selectedRole = zone.dataset.role;
+
+        if (selectedRole === currentCall.role) {
+            handleCorrect();
+        } else {
+            handleWrong();
+        }
+    });
+});
+
+loadCall();
+updateHUD();

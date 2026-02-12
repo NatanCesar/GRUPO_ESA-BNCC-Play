@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.levels-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.levels-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.level-card {
+    background-color: rgba(15, 23, 42, 0.95);
+    padding: 25px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+.level-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
+}
+
+.level-card h2 {
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+.level-card p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.level-card ul {
+    list-style: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.select-btn {
+    background-color: #22c55e;
+    color: black;
+}
+
+.select-btn:hover {
+    background-color: #16a34a;
+}
+
+.secondary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.secondary:hover {
+    background-color: #2563eb;
+}
+
+.footer-buttons {
+    margin-top: 30px;
+}

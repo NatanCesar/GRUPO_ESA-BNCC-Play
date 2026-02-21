@@ -1,6 +1,7 @@
-🎮 Tech Squad Manager
+<h3>Recurso Educacional Digital desenvolvido durante o Estágio Supervisionado III da Licenciatura em Ciência da Computação.</h3>
 
-    Recurso Educacional Digital desenvolvido durante o Estágio Supervisionado III da Licenciatura em Ciência da Computação.
+<h1>🎮 Tech Squad Manager</h1>
+
 
 📝 Sobre o Projeto
 
@@ -12,21 +13,15 @@ O projeto foi concebido para atender alunos do Ensino Médio Técnico em Inform�
 
 A proposta digitaliza uma dinâmica de "jogo de associação" validada em sala de aula, onde o aluno assume o papel de um Gestor de TI. O desafio é receber demandas técnicas (bugs, novas features, problemas de infraestrutura) e delegá-las corretamente para o profissional responsável, reforçando o entendimento sobre as atribuições de:
 
-    Frontend e Backend 
-
-DevOps e QA/Tester
-
-UX/UI Design
-
-Ciência de Dados e Segurança
+    Frontend, Backend, DevOps, UX/UI, QA e Data Scientist 
 
 🚀 Funcionalidades Principais
 
     Gamificação: Uso de pontuação, timer e feedback imediato para engajamento.
 
-Aprendizagem Ativa: O aluno aprende resolvendo problemas baseados em cenários reais.
+🧠 Aprendizagem Ativa
 
-Classificação RED: Enquadra-se como um Jogo Educativo segundo a classificação de Recursos Educacionais Digitais, pois possui finalidade pedagógica intencional para reforçar o desenvolvimento do aluno.
+    O aluno aprende resolvendo problemas baseados em cenários reais.
 
 🛠️ Tecnologias Utilizadas
 

@@ -24,7 +24,19 @@ const calls = [
     { text: "Pipeline de deploy falhou.", role: "devops" },
     { text: "Usuários estão confusos com o layout.", role: "ux" },
     { text: "Bug crítico encontrado em produção.", role: "qa" },
-    { text: "Consulta ao banco está lenta.", role: "data" }
+    { text: "Consulta ao banco está lenta.", role: "data" },
+    { text: "A página não está responsiva no mobile.", role: "frontend" },
+    { text: "O formulário não dispara a validação corretamente.", role: "frontend" },
+    { text: "Erro de autenticação ao gerar o token JWT.", role: "backend" },
+    { text: "Endpoint está retornando dados inconsistentes.", role: "backend" },
+    { text: "Servidor caiu após atualização.", role: "devops" },
+    { text: "Problema na configuração do ambiente de produção.", role: "devops" },
+    { text: "Fluxo de cadastro está confuso.", role: "ux" },
+    { text: "Ícones não deixam claro sua funcionalidade.", role: "ux" },
+    { text: "Funcionalidade quebrou após nova release.", role: "qa" },
+    { text: "Erro intermitente ao finalizar pedido.", role: "qa" },
+    { text: "Relatório está apresentando dados duplicados.", role: "data" },
+    { text: "Índice do banco não está sendo utilizado na consulta.", role: "data" }
 ];
 
 let currentCall;

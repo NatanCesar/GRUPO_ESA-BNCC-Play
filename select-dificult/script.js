@@ -1,12 +1,12 @@
 const levelConfigs = {
     intern: {
-        levelName: "Estagiário",
+        levelName: "Júnior",
         totalCalls: 5,
         timePerCall: 30,
         lives: 5
     },
     junior: {
-        levelName: "Júnior",
+        levelName: "Pleno",
         totalCalls: 8,
         timePerCall: 20,
         lives: 3

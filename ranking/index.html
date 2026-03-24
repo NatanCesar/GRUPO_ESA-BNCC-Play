@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking — Tech Squad Manager</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <main class="ranking-container">
+
+        <h1>🏆 Ranking</h1>
+        <p class="subtitle">Os melhores gestores de TI</p>
+
+        <table class="ranking-table" id="rankingTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Jogador</th>
+                    <th>Pontos</th>
+                    <th>Nível</th>
+                    <th>Aproveit.</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody id="rankingBody"></tbody>
+        </table>
+
+        <p id="emptyMsg" class="empty-msg hidden">Nenhuma partida registrada ainda. Jogue para aparecer aqui!</p>
+
+        <div class="button-group">
+            <button class="btn primary" id="playBtn">Jogar</button>
+            <button class="btn secondary" id="clearBtn">Limpar Ranking</button>
+            <button class="btn secondary" id="backBtn">Menu</button>
+        </div>
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

@@ -17,27 +17,7 @@ let correctAnswers = 0;
 
 document.getElementById("levelName").textContent = config.levelName;
 
-// ===== Chamados =====
-const allCalls = [
-    { text: "O botão não está alinhado corretamente.", role: "frontend", reason: "Alinhamento de elementos visuais é responsabilidade do Frontend, que cuida da interface e experiência visual." },
-    { text: "A API está retornando erro 500.", role: "backend", reason: "Erro 500 indica falha no servidor. O Backend é responsável pela lógica de negócio e pelo funcionamento das APIs." },
-    { text: "Pipeline de deploy falhou.", role: "devops", reason: "Pipelines de CI/CD são gerenciados pelo DevOps, que cuida da infraestrutura e automação de entregas." },
-    { text: "Usuários estão confusos com o layout.", role: "ux", reason: "Problemas de usabilidade e clareza da interface são resolvidos pelo UX/UI, especialista em experiência do usuário." },
-    { text: "Bug crítico encontrado em produção.", role: "qa", reason: "O QA é responsável por garantir a qualidade do software, investigando e documentando bugs encontrados." },
-    { text: "Consulta ao banco está lenta.", role: "data", reason: "Otimização de queries e desempenho de banco de dados é responsabilidade da área de Dados." },
-    { text: "A página não está responsiva no mobile.", role: "frontend", reason: "Responsividade e adaptação do layout para diferentes telas é tarefa do Frontend." },
-    { text: "O formulário não dispara a validação corretamente.", role: "frontend", reason: "Validações de formulários no cliente são implementadas pelo Frontend." },
-    { text: "Erro de autenticação ao gerar o token JWT.", role: "backend", reason: "JWT e autenticação são processados no servidor, sendo responsabilidade do Backend." },
-    { text: "Endpoint está retornando dados inconsistentes.", role: "backend", reason: "A integridade dos dados retornados por endpoints é responsabilidade do Backend." },
-    { text: "Servidor caiu após atualização.", role: "devops", reason: "Estabilidade de servidores e deploys seguros são gerenciados pelo DevOps." },
-    { text: "Problema na configuração do ambiente de produção.", role: "devops", reason: "Configuração de ambientes (dev, staging, produção) é responsabilidade do DevOps." },
-    { text: "Fluxo de cadastro está confuso.", role: "ux", reason: "Fluxos de navegação e experiência do usuário são analisados e corrigidos pelo UX/UI." },
-    { text: "Ícones não deixam claro sua funcionalidade.", role: "ux", reason: "Clareza visual e comunicação dos elementos de interface são responsabilidade do UX/UI." },
-    { text: "Funcionalidade quebrou após nova release.", role: "qa", reason: "Testes de regressão para garantir que novas releases não quebrem funcionalidades são responsabilidade do QA." },
-    { text: "Erro intermitente ao finalizar pedido.", role: "qa", reason: "Identificar e reproduzir erros intermitentes para reportar ao time correto é função do QA." },
-    { text: "Relatório está apresentando dados duplicados.", role: "data", reason: "Duplicidade e consistência de dados em relatórios é investigada pela área de Dados." },
-    { text: "Índice do banco não está sendo utilizado na consulta.", role: "data", reason: "Otimização de índices e performance de consultas SQL é responsabilidade da área de Dados." }
-];
+// allCalls definido em calls.js
 
 function shuffle(array) {
     const arr = [...array];
@@ -147,6 +127,7 @@ function handleWrong() {
 
 // ===== Final do Jogo =====
 function endGame() {
+    const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
 
     const reportData = {
         score,
@@ -156,6 +137,18 @@ function endGame() {
     };
 
     localStorage.setItem("reportData", JSON.stringify(reportData));
+
+    const playerName = localStorage.getItem("playerName") || "Anônimo";
+    const rankings = JSON.parse(localStorage.getItem("rankings") || "[]");
+    rankings.push({
+        name: playerName,
+        score,
+        levelName: config.levelName,
+        accuracy,
+        date: new Date().toLocaleDateString("pt-BR")
+    });
+    rankings.sort((a, b) => b.score - a.score);
+    localStorage.setItem("rankings", JSON.stringify(rankings.slice(0, 10)));
 
     window.location.href = "../report/index.html";
 }

@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.ranking-container {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.ranking-table th {
+    background-color: rgba(15, 23, 42, 0.9);
+    padding: 12px 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+}
+
+.ranking-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 0.95rem;
+}
+
+.ranking-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.rank-1 td:first-child { color: #fbbf24; font-weight: bold; font-size: 1.1rem; }
+.rank-2 td:first-child { color: #94a3b8; font-weight: bold; }
+.rank-3 td:first-child { color: #b45309; font-weight: bold; }
+
+.empty-msg {
+    color: #64748b;
+    margin-bottom: 30px;
+    padding: 40px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.primary {
+    background-color: #22c55e;
+    color: black;
+}
+
+.primary:hover {
+    background-color: #16a34a;
+}
+
+.secondary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.secondary:hover {
+    background-color: #2563eb;
+}

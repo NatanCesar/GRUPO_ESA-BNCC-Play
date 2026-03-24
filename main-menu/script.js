@@ -1,4 +1,7 @@
 document.getElementById("startBtn").addEventListener("click", startGame);
+document.getElementById("rankingBtn").addEventListener("click", () => {
+    window.location.href = "../ranking/index.html";
+});
 document.getElementById("aboutBtn").addEventListener("click", goToAbout);
 
 function startGame() {

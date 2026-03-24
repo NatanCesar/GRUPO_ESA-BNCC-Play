@@ -31,7 +31,7 @@ if (accuracy >= 90) {
 document.getElementById("classification").textContent = classificationText;
 
 document.getElementById("playAgain").addEventListener("click", () => {
-    window.location.href = "../game/index.html";
+    window.location.href = "../select-dificult/index.html";
 });
 
 document.getElementById("backMenu").addEventListener("click", () => {

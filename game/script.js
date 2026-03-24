@@ -172,14 +172,20 @@ if (continueBtn) {
     });
 }
 
-// ===== Drag & Drop =====
+// ===== Drag & Drop (Mouse) =====
 document.querySelectorAll(".drop-zone").forEach(zone => {
 
     zone.addEventListener("dragover", (e) => {
         e.preventDefault();
+        zone.classList.add("drag-over");
+    });
+
+    zone.addEventListener("dragleave", () => {
+        zone.classList.remove("drag-over");
     });
 
     zone.addEventListener("drop", () => {
+        zone.classList.remove("drag-over");
         if (!currentCall) return;
 
         const selectedRole = zone.dataset.role;
@@ -190,6 +196,75 @@ document.querySelectorAll(".drop-zone").forEach(zone => {
             handleWrong();
         }
     });
+});
+
+// ===== Touch Support =====
+const callCard = document.getElementById("callCard");
+let touchClone = null;
+let touchOffsetX = 0;
+let touchOffsetY = 0;
+
+callCard.addEventListener("touchstart", (e) => {
+    if (!currentCall) return;
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    const rect = callCard.getBoundingClientRect();
+
+    touchOffsetX = touch.clientX - rect.left;
+    touchOffsetY = touch.clientY - rect.top;
+
+    touchClone = callCard.cloneNode(true);
+    touchClone.style.position = "fixed";
+    touchClone.style.width = rect.width + "px";
+    touchClone.style.zIndex = "9999";
+    touchClone.style.opacity = "0.85";
+    touchClone.style.pointerEvents = "none";
+    touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+    touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+    touchClone.style.margin = "0";
+    touchClone.style.cursor = "grabbing";
+    document.body.appendChild(touchClone);
+}, { passive: false });
+
+document.addEventListener("touchmove", (e) => {
+    if (!touchClone) return;
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+    touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+
+    document.querySelectorAll(".drop-zone").forEach(z => z.classList.remove("drag-over"));
+    touchClone.style.display = "none";
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    touchClone.style.display = "";
+    const zone = el ? el.closest(".drop-zone") : null;
+    if (zone) zone.classList.add("drag-over");
+}, { passive: false });
+
+document.addEventListener("touchend", (e) => {
+    if (!touchClone) return;
+
+    const touch = e.changedTouches[0];
+    document.querySelectorAll(".drop-zone").forEach(z => z.classList.remove("drag-over"));
+
+    touchClone.style.display = "none";
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    touchClone.remove();
+    touchClone = null;
+
+    if (!currentCall) return;
+
+    const zone = el ? el.closest(".drop-zone") : null;
+    if (!zone) return;
+
+    const selectedRole = zone.dataset.role;
+    if (selectedRole === currentCall.role) {
+        handleCorrect();
+    } else {
+        handleWrong();
+    }
 });
 
 // ===== Util =====

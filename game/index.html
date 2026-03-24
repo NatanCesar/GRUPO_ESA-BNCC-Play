@@ -15,10 +15,16 @@
         <!-- HUD -->
         <header class="hud">
             <div>Nível: <span id="levelName"></span></div>
+            <div>📋 Chamado: <span id="callProgress"></span></div>
             <div>⏳ Tempo: <span id="timer"></span>s</div>
             <div>⭐ Pontos: <span id="score">0</span></div>
             <div>❤️ Vidas: <span id="lives"></span></div>
         </header>
+
+        <!-- Barra de Timer -->
+        <div class="timer-bar-container">
+            <div class="timer-bar" id="timerBar"></div>
+        </div>
 
         <!-- Área do Chamado -->
         <section class="call-area">
@@ -43,6 +49,7 @@
             <div class="modal-content">
                 <h2 id="feedbackTitle"></h2>
                 <p id="feedbackMessage"></p>
+                <p id="feedbackReason" class="feedback-reason"></p>
                 <button id="continueBtn" class="btn">Continuar</button>
             </div>
         </div>

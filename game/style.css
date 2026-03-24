@@ -27,6 +27,23 @@ body {
     font-weight: bold;
 }
 
+/* ===== Timer Bar ===== */
+.timer-bar-container {
+    height: 8px;
+    background-color: #1e293b;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: width 1s linear, background-color 0.5s ease;
+    background-color: #22c55e;
+}
+
 .call-area {
     text-align: center;
     margin-bottom: 40px;
@@ -94,8 +111,16 @@ body {
 }
 
 .modal-content p {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     line-height: 1.5;
+}
+
+.feedback-reason {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    border-top: 1px solid #334155;
+    padding-top: 10px;
+    margin-bottom: 20px;
 }
 
 .modal-content.success {

@@ -18,7 +18,7 @@ let correctAnswers = 0;
 document.getElementById("levelName").textContent = config.levelName;
 
 // ===== Chamados =====
-const calls = [
+const allCalls = [
     { text: "O botão não está alinhado corretamente.", role: "frontend" },
     { text: "A API está retornando erro 500.", role: "backend" },
     { text: "Pipeline de deploy falhou.", role: "devops" },
@@ -38,6 +38,18 @@ const calls = [
     { text: "Relatório está apresentando dados duplicados.", role: "data" },
     { text: "Índice do banco não está sendo utilizado na consulta.", role: "data" }
 ];
+
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+let shuffledCalls = shuffle(allCalls);
+let callIndex = 0;
 
 let currentCall;
 
@@ -72,7 +84,12 @@ function loadCall() {
         return;
     }
 
-    currentCall = calls[Math.floor(Math.random() * calls.length)];
+    if (callIndex >= shuffledCalls.length) {
+        shuffledCalls = shuffle(allCalls);
+        callIndex = 0;
+    }
+
+    currentCall = shuffledCalls[callIndex++];
     document.getElementById("callText").textContent = currentCall.text;
 
     remainingCalls--;

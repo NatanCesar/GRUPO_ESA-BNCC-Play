@@ -14,6 +14,13 @@ export function GameProvider({ children }) {
         }
     });
 
+    // Modo turma
+    const [isClassMode, setIsClassMode] = useState(false);
+    const [sessionCode, setSessionCode] = useState(null);
+    const [playerId, setPlayerId] = useState(null);
+    const [callIndices, setCallIndices] = useState(null);
+    const [sessionRankings, setSessionRankings] = useState([]);
+
     function addRankingEntry(entry) {
         setRankings(prev => {
             const updated = [...prev, entry]
@@ -29,12 +36,26 @@ export function GameProvider({ children }) {
         localStorage.removeItem('rankings');
     }
 
+    function resetClassMode() {
+        setIsClassMode(false);
+        setSessionCode(null);
+        setPlayerId(null);
+        setCallIndices(null);
+        setSessionRankings([]);
+    }
+
     return (
         <GameContext.Provider value={{
             playerName, setPlayerName,
             gameConfig, setGameConfig,
             reportData, setReportData,
             rankings, addRankingEntry, clearRankings,
+            isClassMode, setIsClassMode,
+            sessionCode, setSessionCode,
+            playerId, setPlayerId,
+            callIndices, setCallIndices,
+            sessionRankings, setSessionRankings,
+            resetClassMode,
         }}>
             {children}
         </GameContext.Provider>

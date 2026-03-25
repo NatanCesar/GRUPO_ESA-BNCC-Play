@@ -2,6 +2,7 @@ import { useReducer, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext.jsx';
 import { allCalls } from '../data/calls.js';
+import { api } from '../services/api.js';
 import HUD from '../components/HUD.jsx';
 import TimerBar from '../components/TimerBar.jsx';
 import CallCard from '../components/CallCard.jsx';
@@ -35,18 +36,19 @@ function shuffle(array) {
     return arr;
 }
 
-function buildInitialState(config) {
+function buildInitialState(config, orderedCalls) {
     return {
         score: 0,
         lives: config.lives,
         remainingCalls: config.totalCalls,
         timeLeft: config.timePerCall,
         currentCall: null,
-        shuffledCalls: shuffle(allCalls),
+        shuffledCalls: orderedCalls || shuffle(allCalls),
         callIndex: 0,
         feedback: null,       // { isCorrect, title, message, reason }
         gameOver: false,
         resetSignal: 0,       // incrementado a cada novo chamado para resetar TimerBar
+        answersLog: [],       // respostas acumuladas para envio no modo turma
     };
 }
 
@@ -76,6 +78,13 @@ function reducer(state, action) {
             return {
                 ...state,
                 score: state.score + 100,
+                answersLog: [...state.answersLog, {
+                    callIndex: action.callIndex,
+                    chosenRole: action.chosenRole,
+                    correctRole: state.currentCall.role,
+                    isCorrect: true,
+                    timeSpent: action.timeSpent,
+                }],
                 feedback: {
                     isCorrect: true,
                     title: 'Boa decisão!',
@@ -87,6 +96,13 @@ function reducer(state, action) {
             return {
                 ...state,
                 lives: state.lives - 1,
+                answersLog: [...state.answersLog, {
+                    callIndex: action.callIndex,
+                    chosenRole: action.chosenRole ?? null,
+                    correctRole: state.currentCall.role,
+                    isCorrect: false,
+                    timeSpent: action.timeSpent,
+                }],
                 feedback: {
                     isCorrect: false,
                     title: 'Atenção!',
@@ -104,15 +120,17 @@ function reducer(state, action) {
 }
 
 export default function Game() {
-    const { gameConfig, setReportData, addRankingEntry, playerName } = useGame();
+    const { gameConfig, setReportData, addRankingEntry, playerName,
+            isClassMode, playerId, sessionCode, callIndices, setSessionRankings } = useGame();
     const navigate = useNavigate();
 
-    const [state, dispatch] = useReducer(reducer, gameConfig, buildInitialState);
+    const orderedCalls = callIndices ? callIndices.map(i => allCalls[i]) : null;
+    const [state, dispatch] = useReducer(reducer, null, () => buildInitialState(gameConfig, orderedCalls));
     const timerRef = useRef(null);
     const callCardRef = useRef(null);
     const touchCloneRef = useRef(null);
 
-    const { score, lives, remainingCalls, timeLeft, currentCall, feedback, gameOver, resetSignal } = state;
+    const { score, lives, remainingCalls, timeLeft, currentCall, feedback, gameOver, resetSignal, answersLog, callIndex } = state;
 
     // Carrega primeiro chamado
     useEffect(() => {
@@ -132,7 +150,8 @@ export default function Game() {
     useEffect(() => {
         if (timeLeft <= 0 && currentCall && !feedback) {
             clearInterval(timerRef.current);
-            dispatch({ type: 'WRONG_ANSWER' });
+            const currentCallIndex = (callIndices ?? [])[callIndex - 1] ?? (callIndex - 1);
+            dispatch({ type: 'WRONG_ANSWER', chosenRole: null, callIndex: currentCallIndex, timeSpent: gameConfig.timePerCall });
         }
     }, [timeLeft, currentCall, feedback]);
 
@@ -151,26 +170,42 @@ export default function Game() {
         const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
         const data = { score, totalAnswered, correctAnswers, levelName: gameConfig.levelName };
         setReportData(data);
-        addRankingEntry({
-            name: playerName || 'Anônimo',
-            score,
-            levelName: gameConfig.levelName,
-            accuracy,
-            date: new Date().toLocaleDateString('pt-BR'),
-        });
-        navigate('/report');
+
+        if (isClassMode && playerId) {
+            api.finishPlayer(playerId, {
+                score,
+                livesLeft: lives,
+                correctAnswers,
+                totalAnswered,
+                answers: answersLog,
+            }).then(res => {
+                if (res.rankings) setSessionRankings(res.rankings);
+            }).catch(() => {});
+            navigate('/class-ranking');
+        } else {
+            addRankingEntry({
+                name: playerName || 'Anônimo',
+                score,
+                levelName: gameConfig.levelName,
+                accuracy,
+                date: new Date().toLocaleDateString('pt-BR'),
+            });
+            navigate('/report');
+        }
     }, [gameOver]);
 
     // Resposta via drop
     const handleDrop = useCallback((role) => {
         if (!currentCall || feedback) return;
         clearInterval(timerRef.current);
+        const timeSpent = gameConfig.timePerCall - timeLeft;
+        const currentCallIndex = (callIndices ?? [])[callIndex - 1] ?? (callIndex - 1);
         if (role === currentCall.role) {
-            dispatch({ type: 'CORRECT_ANSWER' });
+            dispatch({ type: 'CORRECT_ANSWER', chosenRole: role, callIndex: currentCallIndex, timeSpent });
         } else {
-            dispatch({ type: 'WRONG_ANSWER' });
+            dispatch({ type: 'WRONG_ANSWER', chosenRole: role, callIndex: currentCallIndex, timeSpent });
         }
-    }, [currentCall, feedback]);
+    }, [currentCall, feedback, timeLeft, gameConfig.timePerCall, callIndex, callIndices]);
 
     // Continuar após feedback
     function handleContinue() {

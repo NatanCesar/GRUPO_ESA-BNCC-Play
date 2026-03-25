@@ -38,6 +38,9 @@ export default function MainMenu() {
                     <button className="btn primary" onClick={handleStart}>
                         Iniciar Turno
                     </button>
+                    <button className="btn secondary" onClick={() => navigate('/join')}>
+                        🏫 Entrar em Turma
+                    </button>
                     <button className="btn secondary" onClick={() => navigate('/ranking')}>
                         🏆 Ranking
                     </button>

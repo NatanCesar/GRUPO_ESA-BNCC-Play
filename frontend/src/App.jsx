@@ -6,6 +6,10 @@ import Game from './pages/Game.jsx';
 import Report from './pages/Report.jsx';
 import Ranking from './pages/Ranking.jsx';
 import About from './pages/About.jsx';
+import Teacher from './pages/Teacher.jsx';
+import JoinSession from './pages/JoinSession.jsx';
+import Lobby from './pages/Lobby.jsx';
+import ClassRanking from './pages/ClassRanking.jsx';
 
 function ProtectedRoute({ condition, redirectTo, children }) {
     if (!condition) return <Navigate to={redirectTo} replace />;
@@ -13,7 +17,7 @@ function ProtectedRoute({ condition, redirectTo, children }) {
 }
 
 function AppRoutes() {
-    const { gameConfig, reportData } = useGame();
+    const { gameConfig, reportData, playerId, isClassMode } = useGame();
 
     return (
         <Routes>
@@ -31,6 +35,18 @@ function AppRoutes() {
             } />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/about" element={<About />} />
+            <Route path="/teacher" element={<Teacher />} />
+            <Route path="/join" element={<JoinSession />} />
+            <Route path="/lobby" element={
+                <ProtectedRoute condition={playerId !== null} redirectTo="/join">
+                    <Lobby />
+                </ProtectedRoute>
+            } />
+            <Route path="/class-ranking" element={
+                <ProtectedRoute condition={isClassMode} redirectTo="/">
+                    <ClassRanking />
+                </ProtectedRoute>
+            } />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );

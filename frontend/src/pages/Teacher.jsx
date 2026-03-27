@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api.js';
 import { connectToSession, disconnectSocket, getSocket } from '../services/socket.js';
 
@@ -14,6 +15,7 @@ const roleLabels = {
 };
 
 export default function Teacher() {
+    const navigate = useNavigate();
     const [view, setView]             = useState('home');   // home | lobby | playing | report
     const [difficulty, setDifficulty] = useState('junior');
     const [session, setSession]       = useState(null);     // { code, sessionId, ... }
@@ -133,8 +135,11 @@ export default function Teacher() {
                 </div>
 
                 <div className="button-group">
-                    <button className="btn primary" onClick={handleCreate} disabled={loading}>
+                    <button className="btn btn-teacher" onClick={handleCreate} disabled={loading}>
                         {loading ? 'Criando...' : 'Criar Sessão'}
+                    </button>
+                    <button className="btn btn-about" onClick={() => navigate('/')}>
+                        Voltar
                     </button>
                 </div>
             </div>

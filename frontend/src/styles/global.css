@@ -214,6 +214,16 @@ body {
     box-shadow: 0 6px 24px rgba(245, 158, 11, 0.5) !important;
 }
 
+.btn-teacher {
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3) !important;
+}
+
+.btn-teacher:hover {
+    box-shadow: 0 6px 24px rgba(168, 85, 247, 0.5) !important;
+}
+
 .btn-about {
     background: linear-gradient(135deg, #475569, #1e293b);
     color: #cbd5e1;

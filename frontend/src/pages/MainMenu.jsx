@@ -41,6 +41,9 @@ export default function MainMenu() {
                     <button className="btn btn-join" onClick={() => navigate('/join')}>
                         Entrar em Turma
                     </button>
+                    <button className="btn btn-teacher" onClick={() => navigate('/teacher')}>
+                        Criar Sala
+                    </button>
                     <button className="btn btn-ranking" onClick={() => navigate('/ranking')}>
                         Ranking
                     </button>

@@ -132,8 +132,11 @@ export default function Game() {
 
     const { score, lives, remainingCalls, timeLeft, currentCall, feedback, gameOver, resetSignal, answersLog, callIndex } = state;
 
-    // Carrega primeiro chamado
+    // Carrega primeiro chamado (ref evita duplo disparo do StrictMode em dev)
+    const initialLoadDone = useRef(false);
     useEffect(() => {
+        if (initialLoadDone.current) return;
+        initialLoadDone.current = true;
         dispatch({ type: 'LOAD_CALL', timePerCall: gameConfig.timePerCall });
     }, [gameConfig.timePerCall]);
 
@@ -155,10 +158,10 @@ export default function Game() {
         }
     }, [timeLeft, currentCall, feedback]);
 
-    // Fim de jogo
+    // Fim de jogo — só dispara quando não há feedback pendente
     useEffect(() => {
-        if (gameOver) return;
-        if (lives <= 0 || (remainingCalls <= 0 && !feedback && !currentCall)) {
+        if (gameOver || feedback) return;
+        if (lives <= 0 || (remainingCalls <= 0 && !currentCall)) {
             dispatch({ type: 'END_GAME' });
         }
     }, [lives, remainingCalls, feedback, currentCall, gameOver]);

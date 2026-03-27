@@ -297,9 +297,14 @@ export default function Teacher() {
                     ))}
                 </div>
 
-                <button className="btn primary ranking-btn-leave" onClick={handleReset}>
-                    Nova Sessão
-                </button>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '0' }}>
+                    <button className="btn primary ranking-btn-leave" onClick={handleReset}>
+                        Nova Sessão
+                    </button>
+                    <button className="btn secondary ranking-btn-leave" onClick={() => { disconnectSocket(); navigate('/'); }}>
+                        Menu Principal
+                    </button>
+                </div>
             </div>
         </main>
     );

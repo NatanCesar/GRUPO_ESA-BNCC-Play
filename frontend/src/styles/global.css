@@ -1,3 +1,6 @@
+/* ===== Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
 /* ===== Reset ===== */
 * {
     margin: 0;
@@ -60,25 +63,63 @@ body {
 }
 
 /* ===== Main Menu ===== */
+@keyframes logoPulse {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.3)); }
+    50%       { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.65)); }
+}
+
+@keyframes btnGlow {
+    from { box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    to   { box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+}
+
 .menu-page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        radial-gradient(ellipse at center, #0d1f3c 0%, #080d1a 100%);
 }
 
 .menu-container {
     text-align: center;
-    background-color: rgba(15, 23, 42, 0.9);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-    width: 400px;
+    background-color: rgba(10, 18, 36, 0.92);
+    padding: 24px 40px 36px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+    width: 420px;
 }
 
 .logo {
-    width: 320px;
-    margin-bottom: 5px;
+    width: 352px;
+    margin-bottom: 6px;
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+.menu-subtitle {
+    color: #64748b;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+    margin-top: -4px;
+    line-height: 1.4;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
 }
 
 .input-group {
@@ -87,21 +128,100 @@ body {
 }
 
 .input-group label {
-    font-size: 14px;
+    font-size: 13px;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
 }
 
 .input-group input {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: none;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.input-group input:focus {
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.08);
 }
 
 .button-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+/* Menu semantic buttons */
+.menu-container .btn {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 11px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.menu-container .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.1);
+}
+
+.menu-container .btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3) !important;
+}
+
+.btn-start:hover {
+    box-shadow: 0 6px 24px rgba(34, 197, 94, 0.5) !important;
+}
+
+.btn-join {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3) !important;
+}
+
+.btn-join:hover {
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5) !important;
+}
+
+.btn-ranking {
+    background: linear-gradient(135deg, #f59e0b, #b45309);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3) !important;
+}
+
+.btn-ranking:hover {
+    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.5) !important;
+}
+
+.btn-about {
+    background: linear-gradient(135deg, #475569, #1e293b);
+    color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-about:hover {
+    box-shadow: 0 6px 20px rgba(71, 85, 105, 0.5) !important;
 }
 
 /* ===== Select Difficulty ===== */

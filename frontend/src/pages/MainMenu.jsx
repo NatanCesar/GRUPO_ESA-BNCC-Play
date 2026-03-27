@@ -23,7 +23,7 @@ export default function MainMenu() {
                 <img src="/Tech-Squad-Manager/logo.png" alt="Tech Squad Manager" className="logo" />
 
                 <div className="input-group">
-                    <label htmlFor="playerName">Digite seu nome:</label>
+                    <label htmlFor="playerName">Nome do jogador</label>
                     <input
                         type="text"
                         id="playerName"
@@ -35,16 +35,16 @@ export default function MainMenu() {
                 </div>
 
                 <div className="button-group">
-                    <button className="btn primary" onClick={handleStart}>
+                    <button className="btn btn-start" onClick={handleStart}>
                         Iniciar Turno
                     </button>
-                    <button className="btn secondary" onClick={() => navigate('/join')}>
-                        🏫 Entrar em Turma
+                    <button className="btn btn-join" onClick={() => navigate('/join')}>
+                        Entrar em Turma
                     </button>
-                    <button className="btn secondary" onClick={() => navigate('/ranking')}>
-                        🏆 Ranking
+                    <button className="btn btn-ranking" onClick={() => navigate('/ranking')}>
+                        Ranking
                     </button>
-                    <button className="btn secondary" onClick={() => navigate('/about')}>
+                    <button className="btn btn-about" onClick={() => navigate('/about')}>
                         Sobre
                     </button>
                 </div>

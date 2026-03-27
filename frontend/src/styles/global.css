@@ -224,6 +224,51 @@ body {
     box-shadow: 0 6px 20px rgba(71, 85, 105, 0.5) !important;
 }
 
+/* ===== Join Session ===== */
+.join-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.page-title {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #38bdf8;
+    text-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+    margin-bottom: 6px;
+}
+
+.join-subtitle {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    color: #64748b;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+}
+
+.error-msg {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.input-code {
+    font-family: 'Orbitron', monospace !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.25em !important;
+    text-transform: uppercase;
+    text-align: center;
+    color: #38bdf8 !important;
+}
+
 /* ===== Select Difficulty ===== */
 .difficulty-page {
     padding: 40px 20px;

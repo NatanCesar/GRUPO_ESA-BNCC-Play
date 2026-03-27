@@ -47,12 +47,15 @@ export default function JoinSession() {
     return (
         <div className="menu-page">
             <div className="menu-container">
-                <h1 className="page-title">Entrar em Turma</h1>
+                <div className="join-header">
+                    <h1 className="page-title">Entrar em Turma</h1>
+                    <p className="join-subtitle">Insira seus dados para conectar à sessão</p>
+                </div>
 
                 {error && <p className="error-msg">{error}</p>}
 
                 <div className="input-group">
-                    <label htmlFor="joinName">Seu nome:</label>
+                    <label htmlFor="joinName">Nome do jogador</label>
                     <input
                         id="joinName"
                         type="text"
@@ -64,24 +67,24 @@ export default function JoinSession() {
                 </div>
 
                 <div className="input-group">
-                    <label htmlFor="sessionCode">Código da turma:</label>
+                    <label htmlFor="sessionCode">Código da turma</label>
                     <input
                         id="sessionCode"
                         type="text"
-                        placeholder="Ex: ABC-123"
+                        placeholder="ABC-123"
                         value={code}
                         onChange={e => setCode(e.target.value.toUpperCase())}
                         onKeyDown={e => e.key === 'Enter' && handleJoin()}
                         maxLength={7}
-                        style={{ letterSpacing: '0.2em', textTransform: 'uppercase' }}
+                        className="input-code"
                     />
                 </div>
 
                 <div className="button-group">
-                    <button className="btn primary" onClick={handleJoin} disabled={loading}>
-                        {loading ? 'Entrando...' : 'Entrar'}
+                    <button className="btn btn-join" onClick={handleJoin} disabled={loading}>
+                        {loading ? 'Conectando...' : 'Entrar na Turma'}
                     </button>
-                    <button className="btn secondary" onClick={() => navigate('/')}>
+                    <button className="btn btn-about" onClick={() => navigate('/')}>
                         Voltar
                     </button>
                 </div>

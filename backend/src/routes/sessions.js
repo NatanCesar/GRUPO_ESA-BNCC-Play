@@ -10,16 +10,18 @@ import {
 } from '../controllers/sessionController.js';
 import { finishPlayer } from '../controllers/playerController.js';
 
+const asyncHandler = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
 const router = Router();
 
-router.post('/sessions',                   createSession);
-router.get('/sessions/:code',              getSession);
-router.post('/sessions/:code/join',        joinSession);
-router.post('/sessions/:code/start',       startSession);
-router.get('/sessions/:code/ranking',      getSessionRanking);
-router.get('/sessions/:code/report',       getSessionReport);
-router.post('/sessions/:code/end',         endSession);
+router.post('/sessions',                   asyncHandler(createSession));
+router.get('/sessions/:code',              asyncHandler(getSession));
+router.post('/sessions/:code/join',        asyncHandler(joinSession));
+router.post('/sessions/:code/start',       asyncHandler(startSession));
+router.get('/sessions/:code/ranking',      asyncHandler(getSessionRanking));
+router.get('/sessions/:code/report',       asyncHandler(getSessionReport));
+router.post('/sessions/:code/end',         asyncHandler(endSession));
 
-router.post('/players/:playerId/finish',   finishPlayer);
+router.post('/players/:playerId/finish',   asyncHandler(finishPlayer));
 
 export default router;

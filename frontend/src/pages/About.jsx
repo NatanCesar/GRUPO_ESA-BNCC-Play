@@ -6,8 +6,10 @@ export default function About() {
     return (
         <div className="about-page">
             <div className="about-container">
-                <h1>Tech Squad Manager</h1>
-                <p className="tagline">Gamificação das Profissões de TI</p>
+                <div className="about-header">
+                    <h1>Tech Squad Manager</h1>
+                    <p className="tagline">Gamificação das Profissões de TI</p>
+                </div>
 
                 <div className="about-section">
                     <h2>Sobre o Projeto</h2>
@@ -41,11 +43,9 @@ export default function About() {
                     <p>Estágio Supervisionado III — Ciência da Computação</p>
                 </div>
 
-                <div className="button-group" style={{ marginTop: '10px' }}>
-                    <button className="btn secondary" onClick={() => navigate('/')}>
-                        Voltar ao Menu
-                    </button>
-                </div>
+                <button className="btn btn-about btn-back" onClick={() => navigate('/')}>
+                    Voltar ao Menu
+                </button>
             </div>
         </div>
     );

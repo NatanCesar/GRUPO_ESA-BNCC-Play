@@ -546,48 +546,103 @@ body {
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        radial-gradient(ellipse at center, #0d1f3c 0%, #080d1a 100%);
 }
 
 .about-container {
-    max-width: 700px;
+    max-width: 580px;
     width: 100%;
-    background-color: rgba(15, 23, 42, 0.9);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    background-color: rgba(10, 18, 36, 0.92);
+    padding: 36px 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 .about-container h1 {
-    font-size: 1.8rem;
-    margin-bottom: 4px;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #e2e8f0;
+    margin-bottom: 6px;
 }
 
 .about-container .tagline {
     color: #38bdf8;
-    margin-bottom: 30px;
-    font-size: 1rem;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .about-section {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border-left: 3px solid rgba(0, 255, 255, 0.35);
 }
 
 .about-section h2 {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
     color: #38bdf8;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .about-section p {
-    color: #cbd5e1;
-    line-height: 1.6;
+    color: #94a3b8;
+    line-height: 1.65;
+    font-size: 0.9rem;
+}
+
+.about-section p + p {
+    margin-top: 4px;
 }
 
 .about-section ul {
     list-style: none;
-    color: #cbd5e1;
+    color: #94a3b8;
 }
 
 .about-section ul li {
-    padding: 3px 0;
+    padding: 4px 0;
+    font-size: 0.9rem;
+}
+
+.about-section ul li::before {
+    content: '— ';
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+.btn-back {
+    width: 100%;
+    margin-top: 8px;
 }

@@ -3,8 +3,9 @@ import { forwardRef } from 'react';
 const CallCard = forwardRef(function CallCard({ text }, ref) {
     return (
         <div className="call-card" draggable="true" ref={ref} id="callCard">
-            <h3>Chamado</h3>
+            <span className="call-card-label">Chamado Recebido</span>
             <p>{text}</p>
+            <span className="call-card-hint">Arraste para a equipe correta</span>
         </div>
     );
 });

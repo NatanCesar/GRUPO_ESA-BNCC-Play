@@ -5,7 +5,7 @@ export default function DropZone({ role, label, onDrop }) {
 
     return (
         <div
-            className={`drop-zone${isDragOver ? ' drag-over' : ''}`}
+            className={`drop-zone drop-zone--${role}${isDragOver ? ' drag-over' : ''}`}
             data-role={role}
             onDragOver={e => { e.preventDefault(); setIsDragOver(true); }}
             onDragLeave={() => setIsDragOver(false)}

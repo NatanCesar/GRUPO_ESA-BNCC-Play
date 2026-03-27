@@ -7,7 +7,7 @@ export default function FeedbackModal({ visible, isCorrect, title, message, reas
                 <h2>{title}</h2>
                 <p>{message}</p>
                 <p className="feedback-reason">{reason}</p>
-                <button className="btn small secondary" onClick={onContinue}>
+                <button className={`btn modal-btn ${isCorrect ? 'btn-start' : 'btn-danger'}`} onClick={onContinue}>
                     Continuar
                 </button>
             </div>

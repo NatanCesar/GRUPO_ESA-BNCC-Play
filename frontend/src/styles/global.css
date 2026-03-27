@@ -795,49 +795,205 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 48px 20px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        radial-gradient(ellipse at center, #0d1f3c 0%, #080d1a 100%);
 }
 
 .report-container {
-    text-align: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
+    background: rgba(10, 18, 36, 0.92);
+    padding: 36px 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 .report-container h1 {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #e2e8f0;
+    margin-bottom: 6px;
 }
 
-.report-card {
-    background-color: rgba(15, 23, 42, 0.9);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-    margin-bottom: 30px;
-    text-align: left;
+.report-subtitle {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    color: #64748b;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
-.report-card h2 {
-    color: #38bdf8;
+/* Classification badge */
+.report-badge {
     text-align: center;
+    padding: 18px 20px;
+    border-radius: 12px;
     margin-bottom: 20px;
-    font-size: 1.3rem;
+    border: 1px solid transparent;
 }
 
-.report-card p {
-    padding: 8px 0;
-    border-bottom: 1px solid #1e293b;
-    font-size: 1rem;
+.report-badge--senior {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.15);
+}
+.report-badge--senior .report-badge-label { color: #f59e0b; }
+
+.report-badge--pleno {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 24px rgba(59, 130, 246, 0.15);
+}
+.report-badge--pleno .report-badge-label { color: #3b82f6; }
+
+.report-badge--junior {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.15);
+}
+.report-badge--junior .report-badge-label { color: #22c55e; }
+
+.report-badge--novato {
+    background: rgba(71, 85, 105, 0.2);
+    border-color: rgba(71, 85, 105, 0.4);
+}
+.report-badge--novato .report-badge-label { color: #94a3b8; }
+
+.report-badge-label {
+    display: block;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
 }
 
-.report-card p:last-child {
-    border-bottom: none;
+.report-badge-message {
+    display: block;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.82rem;
+    color: #64748b;
+    letter-spacing: 0.04em;
 }
 
-.report-container .button-group {
-    flex-direction: row;
-    justify-content: center;
+/* Stats grid */
+.report-stats {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 16px 8px;
+    margin-bottom: 16px;
+}
+
+.report-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.report-stat + .report-stat {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.report-stat-value {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.report-stat-label {
+    font-size: 0.68rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+}
+
+/* Level row */
+.report-level-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.report-level-key {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.78rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.report-level-val {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.06em;
+}
+
+/* Actions */
+.report-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.report-actions .btn {
+    flex: 1;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 11px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+}
+
+.report-actions .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.report-actions .btn:active {
+    transform: scale(0.97);
 }
 
 /* ===== Ranking ===== */

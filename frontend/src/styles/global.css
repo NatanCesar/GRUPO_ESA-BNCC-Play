@@ -483,60 +483,164 @@ body {
 
 /* ===== Ranking ===== */
 .ranking-page {
-    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 48px 20px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        radial-gradient(ellipse at center, #0d1f3c 0%, #080d1a 100%);
 }
 
 .ranking-container {
     width: 100%;
     max-width: 700px;
-    margin: auto;
+    background-color: rgba(10, 18, 36, 0.92);
+    padding: 36px 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.ranking-header {
     text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 .ranking-container h1 {
-    font-size: 2rem;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: #f59e0b;
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
     margin-bottom: 6px;
+}
+
+.ranking-subtitle {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    color: #64748b;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .ranking-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
+}
+
+.ranking-table thead {
+    background: rgba(0, 255, 255, 0.05);
 }
 
 .ranking-table th {
-    background-color: rgba(15, 23, 42, 0.9);
     padding: 12px 10px;
-    font-size: 0.85rem;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #94a3b8;
+    letter-spacing: 0.1em;
+    color: #38bdf8;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
 }
 
 .ranking-table td {
     padding: 12px 10px;
-    border-bottom: 1px solid #1e293b;
-    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    transition: background 0.15s;
 }
 
-.ranking-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+.ranking-table tbody tr:hover td {
+    background-color: rgba(0, 255, 255, 0.04);
 }
 
-.rank-1 td:first-child { color: #fbbf24; font-weight: bold; font-size: 1.1rem; }
-.rank-2 td:first-child { color: #94a3b8; font-weight: bold; }
-.rank-3 td:first-child { color: #b45309; font-weight: bold; }
+.rank-1 td { color: #e2e8f0; }
+.rank-1 td:first-child {
+    color: #fbbf24;
+    font-weight: 900;
+    font-size: 1rem;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+}
+
+.rank-2 td:first-child {
+    color: #94a3b8;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(148, 163, 184, 0.5);
+}
+
+.rank-3 td:first-child {
+    color: #cd7c2f;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(205, 124, 47, 0.5);
+}
 
 .empty-msg {
-    color: #64748b;
-    margin-bottom: 30px;
-    padding: 40px 0;
+    color: #475569;
+    padding: 48px 0;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-align: center;
 }
 
-.ranking-container .button-group {
-    flex-direction: row;
-    justify-content: center;
+.ranking-actions {
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
+}
+
+.ranking-actions .btn {
+    flex: 1;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 11px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.ranking-actions .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.ranking-actions .btn:active {
+    transform: scale(0.97);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3) !important;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.5) !important;
 }
 
 /* ===== About ===== */

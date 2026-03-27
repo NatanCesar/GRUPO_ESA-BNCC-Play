@@ -15,19 +15,21 @@ export default function Ranking() {
     return (
         <div className="ranking-page">
             <div className="ranking-container">
-                <h1>🏆 Ranking</h1>
-                <p className="subtitle">Os melhores gestores de TI</p>
+                <div className="ranking-header">
+                    <h1>Ranking</h1>
+                    <p className="ranking-subtitle">Os melhores gestores de TI</p>
+                </div>
 
                 <RankingTable rankings={rankings} />
 
-                <div className="button-group">
-                    <button className="btn primary" onClick={() => navigate('/select-difficulty')}>
+                <div className="ranking-actions">
+                    <button className="btn btn-start" onClick={() => navigate('/select-difficulty')}>
                         Jogar
                     </button>
-                    <button className="btn secondary danger" onClick={handleClear}>
+                    <button className="btn btn-danger" onClick={handleClear}>
                         Limpar Ranking
                     </button>
-                    <button className="btn secondary" onClick={() => navigate('/')}>
+                    <button className="btn btn-about" onClick={() => navigate('/')}>
                         Menu
                     </button>
                 </div>

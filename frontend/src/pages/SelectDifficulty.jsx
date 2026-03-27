@@ -38,13 +38,16 @@ export default function SelectDifficulty() {
     return (
         <div className="difficulty-page">
             <div className="difficulty-container">
-                <h1>Selecione a Dificuldade</h1>
-                <p className="subtitle">Escolha o nível de acordo com seu conhecimento</p>
+                <div className="difficulty-header">
+                    <h1>Selecione a Dificuldade</h1>
+                    <p className="difficulty-subtitle">Escolha o nível de acordo com seu conhecimento</p>
+                </div>
 
                 <div className="levels-grid">
                     {Object.entries(levelConfigs).map(([key, config]) => (
                         <LevelCard
                             key={key}
+                            levelKey={key}
                             title={config.levelName}
                             description={config.description}
                             calls={config.totalCalls}
@@ -56,7 +59,7 @@ export default function SelectDifficulty() {
                 </div>
 
                 <div className="back-btn-wrapper">
-                    <button className="btn secondary" onClick={() => navigate('/')}>
+                    <button className="btn btn-about" onClick={() => navigate('/')}>
                         Voltar
                     </button>
                 </div>

@@ -271,76 +271,230 @@ body {
 
 /* ===== Select Difficulty ===== */
 .difficulty-page {
-    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 20px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 49px,
+            rgba(0, 255, 255, 0.04) 50px
+        ),
+        radial-gradient(ellipse at center, #0d1f3c 0%, #080d1a 100%);
 }
 
 .difficulty-container {
-    max-width: 900px;
+    max-width: 960px;
+    width: 100%;
     margin: auto;
     text-align: center;
 }
 
+.difficulty-header {
+    margin-bottom: 40px;
+}
+
 .difficulty-container h1 {
-    font-size: 2rem;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #e2e8f0;
     margin-bottom: 8px;
 }
 
-.subtitle {
-    color: #94a3b8;
-    margin-bottom: 40px;
+.difficulty-subtitle {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    color: #64748b;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .levels-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
 }
 
+/* Base card */
 .level-card {
-    background-color: rgba(15, 23, 42, 0.9);
-    padding: 30px;
-    border-radius: 12px;
-    border: 2px solid #1e293b;
-    transition: 0.3s;
+    background-color: rgba(10, 18, 36, 0.92);
+    padding: 28px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
 .level-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    border-color: #38bdf8;
+    transform: translateY(-6px);
 }
+
+/* Per-level accent colors */
+.level-card--junior {
+    border-top: 3px solid #22c55e;
+}
+.level-card--junior:hover {
+    box-shadow: 0 8px 32px rgba(34, 197, 94, 0.25);
+}
+.level-card--junior h2 { color: #22c55e; }
+
+.level-card--pleno {
+    border-top: 3px solid #3b82f6;
+}
+.level-card--pleno:hover {
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+}
+.level-card--pleno h2 { color: #3b82f6; }
+
+.level-card--senior {
+    border-top: 3px solid #f97316;
+}
+.level-card--senior:hover {
+    box-shadow: 0 8px 32px rgba(249, 115, 22, 0.25);
+}
+.level-card--senior h2 { color: #f97316; }
 
 .level-card h2 {
-    color: #38bdf8;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
     margin-bottom: 10px;
-    font-size: 1.4rem;
 }
 
-.level-card p {
-    color: #94a3b8;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-}
-
-.level-card ul {
-    list-style: none;
+.level-card-desc {
+    color: #64748b;
+    font-size: 0.85rem;
+    line-height: 1.55;
     margin-bottom: 20px;
-    text-align: left;
+    flex: 1;
 }
 
-.level-card ul li {
-    padding: 4px 0;
-    font-size: 0.9rem;
-    color: #cbd5e1;
+/* Stats row */
+.level-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.level-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    flex: 1;
+}
+
+.level-stat + .level-stat {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat-value {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.stat-label {
+    font-size: 0.68rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Select button inherits accent per level */
+.level-card--junior .select-btn {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+.level-card--junior .select-btn:hover {
+    box-shadow: 0 6px 24px rgba(34, 197, 94, 0.5);
+}
+
+.level-card--pleno .select-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+.level-card--pleno .select-btn:hover {
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
+}
+
+.level-card--senior .select-btn {
+    background: linear-gradient(135deg, #f97316, #c2410c);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+}
+.level-card--senior .select-btn:hover {
+    box-shadow: 0 6px 24px rgba(249, 115, 22, 0.5);
 }
 
 .level-card .select-btn {
     width: 100%;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 11px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+}
+
+.level-card .select-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.level-card .select-btn:active {
+    transform: scale(0.97);
 }
 
 .back-btn-wrapper {
-    margin-top: 10px;
+    margin-top: 4px;
+}
+
+.back-btn-wrapper .btn {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 11px 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.back-btn-wrapper .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.back-btn-wrapper .btn:active {
+    transform: scale(0.97);
 }
 
 /* ===== Game ===== */

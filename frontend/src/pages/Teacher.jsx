@@ -186,83 +186,120 @@ export default function Teacher() {
     );
 
     if (view === 'playing') return (
-        <main className="report-container">
-            <h1>Acompanhamento ao Vivo</h1>
-            <p className="subtitle" style={{ color: '#38bdf8' }}>⏳ Jogo em andamento</p>
+        <main className="ranking-page">
+            <div className="ranking-container">
+                <div className="ranking-header">
+                    <h1 className="ranking-title">Acompanhamento ao Vivo</h1>
+                    <div className="ranking-status ranking-status--live">
+                        <span className="live-dot" /> <span>Jogo em andamento</span>
+                    </div>
+                </div>
 
-            <div className="report-card" style={{ padding: '0', overflow: 'hidden', marginBottom: '20px' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                        <tr style={{ background: 'rgba(15,23,42,0.8)', fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase' }}>
-                            <th style={{ padding: '12px' }}>#</th>
-                            <th style={{ padding: '12px', textAlign: 'left' }}>Aluno</th>
-                            <th style={{ padding: '12px' }}>Pts</th>
-                            <th style={{ padding: '12px' }}>%</th>
-                            <th style={{ padding: '12px' }}>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rankings.map(r => (
-                            <tr key={r.playerId} style={{ borderTop: '1px solid #1e293b' }}>
-                                <td style={{ padding: '12px', textAlign: 'center' }}>{r.position}</td>
-                                <td style={{ padding: '12px' }}>{r.name}</td>
-                                <td style={{ padding: '12px', textAlign: 'center' }}>{r.score}</td>
-                                <td style={{ padding: '12px', textAlign: 'center' }}>{r.accuracy}%</td>
-                                <td style={{ padding: '12px', textAlign: 'center' }}>
-                                    {r.status === 'FINISHED' ? '✅' : '🎮'}
-                                </td>
+                <div className="teacher-session-info">
+                    <span>{session.levelName}</span>
+                    <span>{session.totalCalls} chamados</span>
+                    <span>{session.timePerCall}s por chamado</span>
+                    <span>{session.lives} vidas</span>
+                </div>
+
+                <div className="ranking-table-wrap" style={{ marginBottom: '24px' }}>
+                    <table className="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Aluno</th>
+                                <th>Pts</th>
+                                <th>Acerto</th>
+                                <th></th>
                             </tr>
-                        ))}
-                        {rankings.length === 0 && (
-                            <tr><td colSpan={5} style={{ padding: '20px', textAlign: 'center', color: '#475569' }}>Aguardando respostas...</td></tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {rankings.map(r => (
+                                <tr key={r.playerId} className="ranking-row">
+                                    <td className="ranking-pos">{r.position}</td>
+                                    <td className="ranking-name">
+                                        <span className="ranking-name-inner">{r.name}</span>
+                                    </td>
+                                    <td className="ranking-pts">{r.score}</td>
+                                    <td className="ranking-acc">{r.accuracy}%</td>
+                                    <td className="ranking-status-cell">
+                                        {r.status === 'FINISHED'
+                                            ? <span className="status-done">✓</span>
+                                            : <span className="status-playing">▶</span>
+                                        }
+                                    </td>
+                                </tr>
+                            ))}
+                            {rankings.length === 0 && (
+                                <tr>
+                                    <td colSpan={5} className="ranking-empty">Aguardando respostas...</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
 
-            <div className="button-group">
-                <button className="btn secondary" onClick={handleEnd}>Encerrar Sessão</button>
+                <button className="btn secondary ranking-btn-leave" onClick={handleEnd}>
+                    Encerrar Sessão
+                </button>
             </div>
         </main>
     );
 
     if (view === 'report' && report) return (
-        <main className="report-container">
-            <h1>Relatório da Turma</h1>
-            <p className="subtitle">{report.levelName} · {report.totalPlayers} aluno{report.totalPlayers !== 1 ? 's' : ''}</p>
+        <main className="ranking-page">
+            <div className="ranking-container">
+                <div className="ranking-header">
+                    <h1 className="ranking-title">Relatório da Turma</h1>
+                    <p className="ranking-subtitle">
+                        {report.levelName} · {report.totalPlayers} aluno{report.totalPlayers !== 1 ? 's' : ''}
+                    </p>
+                </div>
 
-            <div className="report-card" style={{ marginBottom: '16px' }}>
-                <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>Média da turma</p>
-                <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{report.classAverage.score} pts · {report.classAverage.accuracy}%</p>
-            </div>
-
-            {report.players.map((p, i) => (
-                <div key={i} className="report-card" style={{ marginBottom: '12px', textAlign: 'left' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                        <strong>{p.name}</strong>
-                        <span style={{ color: '#38bdf8' }}>{p.score} pts · {p.accuracy}%</span>
+                {/* Média da turma */}
+                <div className="teacher-avg-card">
+                    <div className="teacher-avg-card__col">
+                        <span className="teacher-avg-card__label">Média de pontos</span>
+                        <span className="teacher-avg-card__val">{report.classAverage.score} <small>pts</small></span>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '8px' }}>
-                        {Object.entries(p.byCategory).map(([role, stats]) => (
-                            <div key={role} style={{
-                                background: 'rgba(15,23,42,0.6)',
-                                borderRadius: '6px',
-                                padding: '8px',
-                                textAlign: 'center',
-                                border: `1px solid ${stats.total === 0 ? '#1e293b' : stats.correct === stats.total ? '#22c55e33' : '#ef444433'}`,
-                            }}>
-                                <p style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{roleLabels[role]}</p>
-                                <p style={{ fontWeight: 'bold', color: stats.total === 0 ? '#475569' : stats.correct === stats.total ? '#22c55e' : '#ef4444' }}>
-                                    {stats.correct}/{stats.total}
-                                </p>
-                            </div>
-                        ))}
+                    <div className="teacher-avg-card__divider" />
+                    <div className="teacher-avg-card__col">
+                        <span className="teacher-avg-card__label">Taxa de acerto</span>
+                        <span className="teacher-avg-card__val">{report.classAverage.accuracy}<small>%</small></span>
                     </div>
                 </div>
-            ))}
 
-            <div className="button-group" style={{ marginTop: '24px' }}>
-                <button className="btn primary" onClick={handleReset}>Nova Sessão</button>
+                {/* Cards por aluno */}
+                <div className="teacher-players">
+                    {report.players.map((p, i) => (
+                        <div key={i} className="teacher-player-card">
+                            <div className="teacher-player-card__header">
+                                <span className="teacher-player-card__name">{p.name}</span>
+                                <span className="teacher-player-card__score">{p.score} pts · {p.accuracy}%</span>
+                            </div>
+                            <div className="teacher-category-grid">
+                                {Object.entries(p.byCategory).map(([role, stats]) => {
+                                    const isEmpty = stats.total === 0;
+                                    const isAll   = !isEmpty && stats.correct === stats.total;
+                                    const isNone  = !isEmpty && stats.correct === 0;
+                                    return (
+                                        <div
+                                            key={role}
+                                            className={`teacher-cat${isEmpty ? ' teacher-cat--empty' : isAll ? ' teacher-cat--ok' : isNone ? ' teacher-cat--fail' : ' teacher-cat--partial'}`}
+                                        >
+                                            <span className="teacher-cat__role">{roleLabels[role]}</span>
+                                            <span className="teacher-cat__score">{stats.correct}/{stats.total}</span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <button className="btn primary ranking-btn-leave" onClick={handleReset}>
+                    Nova Sessão
+                </button>
             </div>
         </main>
     );

@@ -1476,6 +1476,197 @@ body {
     filter: brightness(1.1);
 }
 
+/* ===== Teacher report redesign ===== */
+.ranking-subtitle {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: #64748b;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.ranking-empty {
+    padding: 28px;
+    text-align: center;
+    color: #475569;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+}
+
+.teacher-session-info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.teacher-session-info span {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+/* Average card */
+.teacher-avg-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 189, 248, 0.06);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 24px;
+}
+
+.teacher-avg-card__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.teacher-avg-card__divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(56, 189, 248, 0.2);
+    margin: 0 24px;
+}
+
+.teacher-avg-card__label {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.teacher-avg-card__val {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+.teacher-avg-card__val small {
+    font-size: 0.7rem;
+    opacity: 0.65;
+    margin-left: 2px;
+}
+
+/* Player cards */
+.teacher-players {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.teacher-player-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+}
+
+.teacher-player-card:hover {
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+.teacher-player-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+}
+
+.teacher-player-card__name {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 0.02em;
+}
+
+.teacher-player-card__score {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.04em;
+}
+
+/* Category grid */
+.teacher-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.teacher-cat {
+    border-radius: 7px;
+    padding: 8px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid transparent;
+}
+
+.teacher-cat--empty {
+    background: rgba(15, 23, 42, 0.5);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.teacher-cat--ok {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.25);
+}
+
+.teacher-cat--fail {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+.teacher-cat--partial {
+    background: rgba(251, 191, 36, 0.07);
+    border-color: rgba(251, 191, 36, 0.2);
+}
+
+.teacher-cat__role {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.teacher-cat--ok     .teacher-cat__role { color: #4ade80; }
+.teacher-cat--fail   .teacher-cat__role { color: #f87171; }
+.teacher-cat--partial .teacher-cat__role { color: #fcd34d; }
+
+.teacher-cat__score {
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.teacher-cat--ok      .teacher-cat__score { color: #22c55e; }
+.teacher-cat--fail    .teacher-cat__score { color: #ef4444; }
+.teacher-cat--partial .teacher-cat__score { color: #f59e0b; }
+
 /* ===== About ===== */
 .about-page {
     min-height: 100vh;

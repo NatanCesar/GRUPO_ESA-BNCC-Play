@@ -277,4 +277,4 @@ Este projeto está sob a licença MIT.
 
 # Autor
 
-Desenvolvido por **Nataniel Cesar** e Diogo Mendonça de Almeida Oliveira, Fernanda Rodrigues da Silva, Gustavo Coutinho Soares, Luiz Gustavo dos Santos Silva e Marcos Antonio Jose da Silva.
+Desenvolvido por Nataniel Cesar, Diogo Mendonça de Almeida Oliveira, Fernanda Rodrigues da Silva, Gustavo Coutinho Soares, Luiz Gustavo dos Santos Silva e Marcos Antonio Jose da Silva.

@@ -1,16 +1,16 @@
 # BNCC Play
 
-Plataforma educacional gamificada para apoio ao ensino de Computação na Educação Básica, alinhada às diretrizes da BNCC Computação.
+Plataforma educacional gamificada voltada ao apoio do ensino de Computação na Educação Básica, alinhada às diretrizes da BNCC Computação.
 
 ---
 
-## Sobre o Projeto
+# Sobre o Projeto
 
-O **BNCC Play** é uma plataforma desenvolvida com o objetivo de auxiliar professores e estudantes no processo de ensino e aprendizagem de conteúdos relacionados à Computação de forma dinâmica, acessível e gamificada.
+O **BNCC Play** é uma plataforma desenvolvida para auxiliar professores e estudantes no processo de aprendizagem de conteúdos relacionados à Computação de forma dinâmica, acessível e gamificada.
 
-A proposta do sistema é organizar atividades, perguntas, desafios e conteúdos pedagógicos com base nos eixos da BNCC Computação, permitindo que o professor selecione previamente o eixo desejado antes do início das atividades.
+O sistema organiza atividades, perguntas, desafios e conteúdos pedagógicos com base nos eixos da BNCC Computação, permitindo que o professor selecione previamente o eixo desejado antes do início das atividades.
 
-O sistema busca fortalecer competências relacionadas a:
+A proposta busca fortalecer competências como:
 
 * Pensamento computacional
 * Resolução de problemas
@@ -18,7 +18,7 @@ O sistema busca fortalecer competências relacionadas a:
 * Aprendizagem ativa
 * Gamificação educacional
 
-Além disso, o projeto foi pensado para oferecer uma experiência simples, intuitiva e acessível para utilização em ambiente escolar.
+Além disso, o projeto considera princípios de UX/UI para oferecer uma experiência simples, intuitiva e acessível em ambiente escolar.
 
 ---
 
@@ -26,7 +26,7 @@ Além disso, o projeto foi pensado para oferecer uma experiência simples, intui
 
 * Apoiar o ensino de Computação na Educação Básica
 * Tornar as aulas mais interativas e gamificadas
-* Facilitar a organização pedagógica de conteúdos
+* Facilitar a organização pedagógica dos conteúdos
 * Incentivar a participação ativa dos estudantes
 * Permitir expansão modular baseada na BNCC Computação
 
@@ -40,40 +40,10 @@ Além disso, o projeto foi pensado para oferecer uma experiência simples, intui
 * Cadastro dinâmico de questões
 * Organização de questões por categorias
 * Níveis de dificuldade
-* Filtragem de conteúdos por eixo
+* Filtragem de conteúdos conforme o eixo escolhido
 * Interface voltada para professores e estudantes
 * Estrutura modular e escalável
 * Plataforma de apoio pedagógico
-
----
-
-# Estrutura Modular
-
-O sistema foi projetado para suportar múltiplos eixos da BNCC Computação, permitindo expansão futura de conteúdos e atividades.
-
-Exemplo de estrutura:
-
-```text
-BNCC Play
-├── Eixo 1
-│   ├── Categorias
-│   ├── Questões
-│   ├── Desafios
-│   └── Níveis
-├── Eixo 2
-├── Eixo 3
-└── ...
-```
-
----
-
-# Público-Alvo
-
-* Professores da Educação Básica
-* Estudantes
-* Instituições de ensino
-* Projetos educacionais
-* Pesquisadores na área de Educação e Computação
 
 ---
 
@@ -82,16 +52,16 @@ BNCC Play
 ## Frontend
 
 * React
-* TypeScript
 * Vite
-* TailwindCSS
+* React Router DOM
+* Socket.IO Client
 
 ## Backend
 
-* FastAPI
-* Python
-* SQLAlchemy
-* Pydantic
+* Node.js
+* Express
+* Socket.IO
+* Prisma ORM
 
 ## Banco de Dados
 
@@ -99,23 +69,26 @@ BNCC Play
 
 ---
 
-# Arquitetura do Projeto
+# Estrutura do Projeto
 
-```text
-frontend/
-├── src/
-├── components/
-├── pages/
-├── services/
-└── styles/
-
-backend/
-├── app/
-├── routers/
-├── models/
-├── schemas/
-├── services/
-└── database/
+```text id="0zy6t4"
+BNCC-Play/
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── prisma/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── lib/
+│   │   ├── routes/
+│   │   ├── socket/
+│   │   └── server.js
+│   └── package.json
+│
+└── README.md
 ```
 
 ---
@@ -150,55 +123,118 @@ O projeto considera princípios de UX/UI para garantir:
 
 ## Pré-requisitos
 
-* Node.js
-* Python 3.11+
+* Node.js 18+
 * PostgreSQL
+* npm ou yarn
 
 ---
 
-## Frontend
+# Clonar o Repositório
 
-```bash
-cd frontend
+```bash id="jlwmif"
+git clone https://github.com/NatanCesar/BNCC-Play.git
 
+cd BNCC-Play
+```
+
+---
+
+# Backend
+
+## Acessar pasta
+
+```bash id="fkgqyf"
+cd backend
+```
+
+## Instalar dependências
+
+```bash id="5v2m87"
 npm install
+```
 
+## Configurar variáveis de ambiente
+
+Crie um arquivo `.env` na pasta `backend`:
+
+```env id="psuz7z"
+DATABASE_URL="postgresql://user:password@localhost:5432/bncc_play"
+
+PORT=3001
+
+FRONTEND_ORIGIN=http://localhost:5173
+```
+
+---
+
+## Gerar cliente Prisma
+
+```bash id="t67g2m"
+npm run db:generate
+```
+
+---
+
+## Executar migrations
+
+```bash id="vukn10"
+npm run db:migrate
+```
+
+---
+
+## Iniciar backend
+
+```bash id="3of6p6"
 npm run dev
 ```
 
+Servidor disponível em:
+
+```text id="4y5ccm"
+http://localhost:3001
+```
+
 ---
+
+# Frontend
+
+## Acessar pasta
+
+```bash id="h0hhq4"
+cd frontend
+```
+
+## Instalar dependências
+
+```bash id="q4qaqn"
+npm install
+```
+
+## Executar aplicação
+
+```bash id="4mrmkk"
+npm run dev
+```
+
+Frontend disponível em:
+
+```text id="65q3xr"
+http://localhost:5173
+```
+
+---
+
+# Scripts Disponíveis
 
 ## Backend
 
-```bash
-cd backend
-
-python -m venv venv
-
-source venv/bin/activate
-```
-
-### Instalar dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### Executar API
-
-```bash
-uvicorn app.main:app --reload
-```
-
----
-
-# Variáveis de Ambiente
-
-## Backend `.env`
-
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/bncc_play
-SECRET_KEY=your_secret_key
+```bash id="n4m9j5"
+npm run dev
+npm start
+npm run db:migrate
+npm run db:generate
+npm run db:studio
 ```
 
 ---
@@ -213,19 +249,19 @@ Contribuições são bem-vindas.
 
 2. Crie uma branch:
 
-```bash
+```bash id="1jdr6k"
 git checkout -b feature/minha-feature
 ```
 
 3. Commit suas alterações:
 
-```bash
+```bash id="k9b4h9"
 git commit -m "feat: minha nova feature"
 ```
 
 4. Envie para sua branch:
 
-```bash
+```bash id="1olr6n"
 git push origin feature/minha-feature
 ```
 
